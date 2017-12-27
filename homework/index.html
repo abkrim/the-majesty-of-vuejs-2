@@ -1,7 +1,7 @@
 <html>
 <head>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <title>Iterar arreglos</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <title>Iterar arreglos + boton upvotes</title>
 </head>
 <body>
     <div class="container">
@@ -13,13 +13,18 @@
             </li>
         </ul>
         </div>
+        <div>
+            <button v-on:click="upvote">
+                    ¡Votar! {{ upvotes }}
+            </button>
+        </div>
         <pre>
             {{ $data }}
         </pre>
     </div>
 </body>
 <!-- cdn that contains all contents of Vue.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
 <script type="text/javascript">
   new Vue({
     el: '.container',
@@ -32,6 +37,12 @@
         eyeColor: "green-brown",
         favoriteFood: "All"
       },
+      upvotes: 0
+    },
+    methods: {
+        upvote() { // upvote: fucntion () {}
+            this.upvotes++;  // return
+        }
     }
   })
 </script>
