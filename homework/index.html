@@ -1,0 +1,33 @@
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <title>Iterar arreglos</title>
+</head>
+<body>
+<div class="container">
+    <h1>Excuchemos algunas historias</h1>
+
+    <ul class="list-group">
+        <li v-for="story in stories" class="list-group-item">
+            Alguien dijo "{{ story }}"
+        </li>
+    </ul>
+    <!-- displays all data within Vue instance filtered through JSON -->
+    <pre>{{ $data }}</pre>
+</div>
+</body>
+<!-- cdn that contains all contents of Vue.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.min.js"></script>
+<script type="text/javascript">
+    new Vue({
+        el: '.container',
+        data: {
+            stories: [
+                'Aprendo Vue2',
+                'Trabajo a tiempo parcial',
+                'Como de vez en cuando'
+            ]
+        },
+    })
+</script>
+</html>
