@@ -1,23 +1,26 @@
 <html>
 <head>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
-    <title>Iterar arreglos + boton upvotes</title>
+    <title>Calculadora</title>
 </head>
 <body>
     <div class="container">
-        <h1>This is me!</h1>
-        <div>
-            <ul class="list-group">
-            <li v-for="(value, key, index) in quotes" class="list-group-item">
-                {{ index }}:  {{ key }} = {{ value }}
-            </li>
-        </ul>
-        </div>
-        <div>
-            <button v-on:click="upvote">
-                    ¡Votar! {{ upvotes }}
-            </button>
-        </div>
+        <h1>Calculadora</h1>
+        <h3>Ingresa 2 números y elige una operación</h3>
+        <form class="form-inline">
+            <!-- usamos el modificar especial 'number' para convertir string a número -->
+            <input v-model.number="a" class="form-control">
+            <select v-model="operator" class="form-control">
+                <option>+</option>
+                <option>-</option>
+                <option>*</option>
+                <option>/</option>
+            </select>
+            <input v-model.number="b" class="form-control">
+            <button type="submit" @click.prevent="calculate" class="btn btn-primary">Calcular</button>
+        </form>
+        <h3>Resultado: {{ a }} {{ operator }} {{ b }} = {{ c }}</h3>
+        <hr>
         <pre>
             {{ $data }}
         </pre>
@@ -29,19 +32,29 @@
   new Vue({
     el: '.container',
     data: {
-      quotes:
-      {
-        name: "Abkrim",
-        height: "1.80m",
-        weigh: "95kg",
-        eyeColor: "green-brown",
-        favoriteFood: "All"
-      },
-      upvotes: 0
+        a: 7,
+        b: 2,
+        c: null,
+        operator: "+",
     },
     methods: {
-        upvote() { // upvote: fucntion () {}
-            this.upvotes++;  // return
+        calculate() {
+            switch (this.operator) {
+                case "+":
+                    this.c = this.a + this.b
+                    break;
+                case "-":
+                    this.c = this.a - this.b
+                    break;
+                case "*":
+                    this.c = this.a * this.b
+                    break;
+                case "/":
+                    this.c = this.a / this.b
+                    break;
+                default:
+                    break;
+            }
         }
     }
   })
