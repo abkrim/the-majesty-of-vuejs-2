@@ -9,7 +9,7 @@
 
     <ul class="list-group">
         <li v-for="story in stories" class="list-group-item">
-            Alguien dijo "{{ story }}"
+            {{ story.writer }} dijo "{{ story.plot }}"
         </li>
     </ul>
     <!-- displays all data within Vue instance filtered through JSON -->
@@ -23,9 +23,18 @@
         el: '.container',
         data: {
             stories: [
-                'Aprendo Vue2',
-                'Trabajo a tiempo parcial',
-                'Como de vez en cuando'
+                {
+                    plot: 'Aprendo Vue2',
+                    writer: 'Abkrim'
+                },
+                {
+                    plot: 'Trabajo a tiempo parcial',
+                    writer: 'Kiko'
+                },
+                {
+                    plot: 'Como de vez en cuando',
+                    writer: 'Ibrahim'
+                },
             ]
         },
     })
