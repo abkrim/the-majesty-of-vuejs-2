@@ -4,39 +4,35 @@
     <title>Iterar arreglos</title>
 </head>
 <body>
-<div class="container">
-    <h1>Excuchemos algunas historias</h1>
-
-    <ul class="list-group">
-        <li v-for="story in stories" class="list-group-item">
-            {{ story.writer }} dijo "{{ story.plot }}"
-        </li>
-    </ul>
-    <!-- displays all data within Vue instance filtered through JSON -->
-    <pre>{{ $data }}</pre>
-</div>
+    <div class="container">
+        <h1>This is me!</h1>
+        <div>
+            <ul class="list-group">
+            <li v-for="(value, key, index) in quotes" class="list-group-item">
+                {{ index }}:  {{ key }} = {{ value }}
+            </li>
+        </ul>
+        </div>
+        <pre>
+        {{ $data }}
+        </pre>
+    </div>
 </body>
 <!-- cdn that contains all contents of Vue.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.min.js"></script>
 <script type="text/javascript">
-    new Vue({
-        el: '.container',
-        data: {
-            stories: [
-                {
-                    plot: 'Aprendo Vue2',
-                    writer: 'Abkrim'
-                },
-                {
-                    plot: 'Trabajo a tiempo parcial',
-                    writer: 'Kiko'
-                },
-                {
-                    plot: 'Como de vez en cuando',
-                    writer: 'Ibrahim'
-                },
-            ]
-        },
-    })
+  new Vue({
+    el: '.container',
+    data: {
+      quotes:
+      {
+        name: "Abkrim",
+        height: "1.80m",
+        weigh: "95kg",
+        eyeColor: "green-brown",
+        favoriteFood: "All"
+      },
+    }
+  })
 </script>
 </html>
