@@ -6,11 +6,15 @@
 <body>
     <div class="container">
         <h1>Propiedades computadas</h1>
+        <h3>Ingresa dos números para calcular la operación</h3>
 
-        <div class="container">
-            a = {{ a }}, b = {{ b }}
-            <input v-model.number="a"> <!-- Fuerza a que lo entrado sea tratado como numero -->
-        </div>
+        <form class="form-inline">
+            <input v-model.number="a" class="form-control">
+            <input v-model="operator" class="form-control">
+            <input v-model.number="b" class="form-control">
+        </form>
+
+        <h2>Resultado: {{ a }} {{ operator }} {{ b }} = {{ c }}</h2>
 
         <hr />
         <pre>
@@ -25,12 +29,25 @@
     el: '.container',
     data: {
         a: 1,
+        b: 2,
+        operator: "+",
     },
     computed: {
-        // Getter computado
-        b() {
-            // return parseFloat(this.a) + 1
-            return this.a + 1
+        c() {
+            switch (this.operator) {
+                case "+":
+                    return this.a + this.b
+                    break;
+                case "-":
+                    return this.a - this.b
+                    break;
+                case "*":
+                    return this.a * this.b
+                    break;
+                case "/":
+                    return this.a / this.b
+                    break;
+            }
         }
     }
   })
