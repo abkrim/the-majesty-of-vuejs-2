@@ -9,14 +9,14 @@
         <h3>Ingresa 2 números y elige una operación</h3>
         <form class="form-inline">
             <!-- usamos el modificar especial 'number' para convertir string a número -->
-            <input v-model.number="a" class="form-control">
+            <input v-model.number="a" @keyup.enter="calculate" class="form-control">
             <select v-model="operator" class="form-control">
                 <option>+</option>
                 <option>-</option>
                 <option>*</option>
                 <option>/</option>
             </select>
-            <input v-model.number="b" class="form-control">
+            <input v-model.number="b" @keyup.enter="calculate" class="form-control">
             <button type="submit" @click.prevent="calculate" class="btn btn-primary">Calcular</button>
         </form>
         <h3>Resultado: {{ a }} {{ operator }} {{ b }} = {{ c }}</h3>
