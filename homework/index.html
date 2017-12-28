@@ -1,57 +1,62 @@
 <html>
 <head>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
-    <title>Elecciones</title>
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">
+    <title>Filtros</title>
 </head>
 <body>
     <div class="container">
-        <h1>La gente de Vue</h1>
+        <h1>Historias de los usuarios</h1>
+
+        <div>
+            <h3>Historias de Alex</h3>
             <ul class="list-group">
-                <li v-for="candidate in candidates" class="list-group-item">
-                    {{ candidate.name }} {{ candidate.votes }}
-                    <!-- Incrementar votos -->
-                    <button class="btn btn-default" @click="candidate.votes++">Vote</button>
+                <li v-for="story in storiesBy('Alex')" class="list-group-item">
+                    {{ story.writer }} dijo "{{ story.plot }}"
                 </li>
             </ul>
-            <!-- escuchar los eventos del teclado -->
-            <input @keyup.delete="clear" class="form-control" placeholder="press 'delete' to reset">
-            <!-- Display name of mayor -->
-            <h2>Nuestro alcalde es {{ mayor.name }}</h2>
+            <h3>Historias de Kiko</h3>
+            <ul class="list-group">
+                <li v-for="story in storiesBy('Kiko')" class="list-group-item">
+                    {{ story.writer }} dijo "{{ story.plot }}"
+                </li>
+            </ul>
+        </div>
+
         <hr />
         <pre>{{ $data }}</pre>
         <pre>{{ mayor }}</pre>
     </div>
 </body>
-<!-- cdn that contains all contents of Vue.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+
+<script src="../assets/js/vue.js"></script>
+
 <script type="text/javascript">
   new Vue({
     el: '.container',
     data: {
-        candidates: [
-            {name: "Abdelkarim", votes: 35},
-            {name: "Ibrahim", votes: 33},
-            {name: "Yamna", votes: 18},
-            {name: "Aicha", votes: 25}
-        ]
-    },
-    computed: {
-        mayor() {
-            // Ordenados el arreglo de forma descendente
-            var candidatesSorted = this.candidates.sort(function (a,b) {
-                return b.votes - a.votes;
-            });
-            // El Alcalde sera el primero
-            return candidatesSorted[0];
-        }
+        stories: [
+            {
+                plot: "Me robaron la cartera!",
+                writer: "Alex"
+            },
+            {
+                plot: "Vi una película",
+                writer: "Kiko"
+            },
+            {
+                plot: "Encontre una barra de chocolate",
+                writer: "Kiko"
+            },
+            {
+                plot: "Me tome una coca-colas!",
+                writer: "Alex"
+            },
+        ],
     },
     methods: {
-        // Cuando la tecla 'delete' es presionada
-        clear() {
-            // Todos los candidatos a 0 votos
-            this.candidates = this.candidates.map(function (candidate) {
-                candidate.votes = 0;
-                return candidate;
+        storiesBy(writer) {
+            return this.stories.filter(function (story) {
+                return story.writer === writer
             });
         }
     }

@@ -1,0 +1,84 @@
+<html>
+<head>
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">
+    <title>Categorias</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Categorias</h1>
+        <select v-model="selected">
+            <option v-for="category in mainCat()" v-bind:value="category.id">{{ category.name }}</option>
+        </select>
+        <select v-model="selected">
+                <option v-for="category in subCat(3)" v-bind:value="category.id">{{ category.name }}</option>
+        </select>
+
+        <hr />
+        <pre>{{ $data }}</pre>
+    </div>
+</body>
+<!-- cdn that contains all contents of Vue.js -->
+<script src="../assets/js/vue.js"></script>
+<script type="text/javascript">
+  new Vue({
+    el: '.container',
+    data: {
+        selected: '0',
+        categories: [
+            {
+                'id': 3,
+                'name': 'Motor',
+                'parent_id': 0
+            },
+            {
+                'id': 4,
+                'name': 'Casa Jardin',
+                'parent_id': 0
+            },
+            {
+                'id': 5,
+                'name': 'Moda y Belleza',
+                'parent_id': 0
+            },
+            {
+                'id': 27,
+                'name': 'De época',
+                'parent_id': 3
+            },
+            {
+                'id': 26,
+                'name': 'Coches',
+                'parent_id': 3
+            },
+            {
+                'id': 37,
+                'name': 'Electrodomésticos',
+                'parent_id': 4
+            },
+            {
+                'id': 34,
+                'name': 'Bricolaje',
+                'parent_id': 4
+            },
+            {
+                'id': 43,
+                'name': 'Ropa y complementos',
+                'parent_id': 5
+            },
+        ]
+    },
+    methods: {
+        mainCat() {
+            return this.categories.filter(function (category) {
+                return category.parent_id === 0
+            })
+        },
+        subCat(parent_id) {
+            return this.categories.filter(function (category) {
+                return category.parent_id === parent_id
+            })
+        }
+    }
+  })
+</script>
+</html>
