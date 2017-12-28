@@ -1,26 +1,18 @@
 <html>
 <head>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
-    <title>Calculadora</title>
+    <title>Propiedades computadas</title>
 </head>
 <body>
     <div class="container">
-        <h1>Calculadora</h1>
-        <h3>Ingresa 2 números y elige una operación</h3>
-        <form class="form-inline">
-            <!-- usamos el modificar especial 'number' para convertir string a número -->
-            <input v-model.number="a" @keyup.enter="calculate" class="form-control">
-            <select v-model="operator" class="form-control">
-                <option>+</option>
-                <option>-</option>
-                <option>*</option>
-                <option>/</option>
-            </select>
-            <input v-model.number="b" @keyup.enter="calculate" class="form-control">
-            <button type="submit" @click.prevent="calculate" class="btn btn-primary">Calcular</button>
-        </form>
-        <h3>Resultado: {{ a }} {{ operator }} {{ b }} = {{ c }}</h3>
-        <hr>
+        <h1>Propiedades computadas</h1>
+
+        <div class="container">
+            a = {{ a }}, b = {{ b }}
+            <input v-model.number="a"> <!-- Fuerza a que lo entrado sea tratado como numero -->
+        </div>
+
+        <hr />
         <pre>
             {{ $data }}
         </pre>
@@ -32,29 +24,13 @@
   new Vue({
     el: '.container',
     data: {
-        a: 7,
-        b: 2,
-        c: null,
-        operator: "+",
+        a: 1,
     },
-    methods: {
-        calculate() {
-            switch (this.operator) {
-                case "+":
-                    this.c = this.a + this.b
-                    break;
-                case "-":
-                    this.c = this.a - this.b
-                    break;
-                case "*":
-                    this.c = this.a * this.b
-                    break;
-                case "/":
-                    this.c = this.a / this.b
-                    break;
-                default:
-                    break;
-            }
+    computed: {
+        // Getter computado
+        b() {
+            // return parseFloat(this.a) + 1
+            return this.a + 1
         }
     }
   })
