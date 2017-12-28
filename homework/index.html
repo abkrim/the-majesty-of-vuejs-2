@@ -1,25 +1,25 @@
 <html>
 <head>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
-    <title>Propiedades computadas</title>
+    <title>Elecciones</title>
 </head>
 <body>
     <div class="container">
-        <h1>Propiedades computadas</h1>
-        <h3>Ingresa dos números para calcular la operación</h3>
-
-        <form class="form-inline">
-            <input v-model.number="a" class="form-control">
-            <input v-model="operator" class="form-control">
-            <input v-model.number="b" class="form-control">
-        </form>
-
-        <h2>Resultado: {{ a }} {{ operator }} {{ b }} = {{ c }}</h2>
-
+        <h1>La gente de Vue</h1>
+            <ul class="list-group">
+                <li v-for="candidate in candidates" class="list-group-item">
+                    {{ candidate.name }} {{ candidate.votes }}
+                    <!-- Incrementar votos -->
+                    <button class="btn btn-default" @click="candidate.votes++">Vote</button>
+                </li>
+            </ul>
+            <!-- escuchar los eventos del teclado -->
+            <input @keyup.delete="clear" class="form-control" placeholder="press 'delete' to reset">
+            <!-- Display name of mayor -->
+            <h2>Nuestro alcalde es {{ mayor.name }}</h2>
         <hr />
-        <pre>
-            {{ $data }}
-        </pre>
+        <pre>{{ $data }}</pre>
+        <pre>{{ mayor }}</pre>
     </div>
 </body>
 <!-- cdn that contains all contents of Vue.js -->
@@ -28,26 +28,31 @@
   new Vue({
     el: '.container',
     data: {
-        a: 1,
-        b: 2,
-        operator: "+",
+        candidates: [
+            {name: "Abdelkarim", votes: 35},
+            {name: "Ibrahim", votes: 33},
+            {name: "Yamna", votes: 18},
+            {name: "Aicha", votes: 25}
+        ]
     },
     computed: {
-        c() {
-            switch (this.operator) {
-                case "+":
-                    return this.a + this.b
-                    break;
-                case "-":
-                    return this.a - this.b
-                    break;
-                case "*":
-                    return this.a * this.b
-                    break;
-                case "/":
-                    return this.a / this.b
-                    break;
-            }
+        mayor() {
+            // Ordenados el arreglo de forma descendente
+            var candidatesSorted = this.candidates.sort(function (a,b) {
+                return b.votes - a.votes;
+            });
+            // El Alcalde sera el primero
+            return candidatesSorted[0];
+        }
+    },
+    methods: {
+        // Cuando la tecla 'delete' es presionada
+        clear() {
+            // Todos los candidatos a 0 votos
+            this.candidates = this.candidates.map(function (candidate) {
+                candidate.votes = 0;
+                return candidate;
+            });
         }
     }
   })
