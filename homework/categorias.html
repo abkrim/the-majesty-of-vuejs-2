@@ -7,10 +7,10 @@
     <div class="container">
         <h1>Categorias</h1>
         <select v-model="selected">
-            <option v-for="category in mainCat()" v-bind:value="category.id">{{ category.name }}</option>
+            <option v-for="category in mainCat()" v-bind:value="category.code">{{ category.name }}</option>
         </select>
         <select v-model="selected">
-                <option v-for="category in subCat(3)" v-bind:value="category.id">{{ category.name }}</option>
+                <option v-for="category in subCat(3)" v-bind:value="category.code">{{ category.name }}</option>
         </select>
 
         <hr />
@@ -26,29 +26,40 @@
         selected: '0',
         categories: [
             {
+                'id': 0,
+                'name': 'Todas las categorias',
+                'parent_id': 0,
+                'code': 0
+            },
+            {
                 'id': 3,
                 'name': 'Motor',
-                'parent_id': 0
+                'parent_id': 0,
+                'code': 3
             },
             {
                 'id': 4,
                 'name': 'Casa Jardin',
-                'parent_id': 0
+                'parent_id': 0,
+                'code': 4
             },
             {
                 'id': 5,
                 'name': 'Moda y Belleza',
-                'parent_id': 0
+                'parent_id': 0,
+                'code': 5
             },
             {
                 'id': 27,
                 'name': 'De época',
-                'parent_id': 3
+                'parent_id': 3,
+                'code': 305
             },
             {
                 'id': 26,
                 'name': 'Coches',
-                'parent_id': 3
+                'parent_id': 3,
+                'code': 304
             },
             {
                 'id': 37,
@@ -58,12 +69,14 @@
             {
                 'id': 34,
                 'name': 'Bricolaje',
-                'parent_id': 4
+                'parent_id': 4,
+                'code': 402
             },
             {
                 'id': 43,
                 'name': 'Ropa y complementos',
-                'parent_id': 5
+                'parent_id': 5,
+                'code': 502
             },
         ]
     },
