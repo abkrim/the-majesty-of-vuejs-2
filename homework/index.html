@@ -10,10 +10,11 @@
         <div>
             <h3>Historias</h3>
             <ul class="list-group">
-                <li v-for="story in famous" class="list-group-item">
+                <li v-for="story in orderedStories" class="list-group-item">
                     {{ story.writer }} dijo "{{ story.plot }}" {{ story.upvotes }} votos
                 </li>
             </ul>
+            <button @click="order = order * -1">Invertir orden</button>
             <hr />
             <div class="form-group">
                 <label for="query">
@@ -62,7 +63,8 @@
                 upvotes: 18
             },
         ],
-        query: ''
+        query: '',
+        order: -1
     },
     computed:{
         famous() {
@@ -74,6 +76,12 @@
             var query =this.query
             return this.stories.filter(function (story) {
                 return story.plot.includes(query)
+            })
+        },
+        orderedStories() {
+            var order = this.order;
+            return this.stories.sort(function (a,b) {
+                return ((a.upvotes - b.upvotes) * order) //Por -1 para descendente
             })
         }
     },
