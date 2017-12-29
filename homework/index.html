@@ -5,7 +5,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Historias de los usuarios</h1>
+        <h1>Historias de los usuarios!! ({{ famous.length }})</h1>
 
         <div>
             <h3>Historias</h3>
@@ -53,7 +53,7 @@
     computed:{
         famous() {
             return this.stories.filter(function (item) {
-                return item.upvotes;
+                return item.upvotes > 25;
             });
         }
     },
